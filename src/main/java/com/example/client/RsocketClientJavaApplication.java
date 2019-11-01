@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @SpringBootApplication
 public class RsocketClientJavaApplication {
@@ -31,7 +32,9 @@ public class RsocketClientJavaApplication {
 	RSocketRequester rSocketRequester(RSocketStrategies rSocketStrategies) {
 		return RSocketRequester.builder()
 				.rsocketStrategies(rSocketStrategies)
-				.connectTcp("localhost", 7000)
+
+				.connectWebSocket(URI.create("ws://localhost:8080/aiod"))
+//				.connectTcp("localhost", 7000)
 				.block();
 	}
 
